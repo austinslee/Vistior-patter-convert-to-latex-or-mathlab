@@ -15,12 +15,9 @@ class Rand : public Base {
 			string stringVal = to_string(val);
 			return stringVal;
 		}
-		void accept(Visitor*);
+		void accept(Visitor* v){
+            v->visit_rand(this);
+        };
 };
-
-void Rand::accept(Visitor* v)
-{
-	v->visit_rand(this);
-}
 
 #endif //__RAND_HPP__		

@@ -24,6 +24,17 @@ class Pow : public Base {
 		virtual string stringify() {
 			return "(" + operand->stringify() + "**" + exponent->stringify() + ")";
 		}
+		void accept(Visitor* v,int index){
+            if (index == 0){
+                v->visit_pow_begin(this);
+            }
+            else if(index == 1){
+                v->visit_pow_middle(this);
+            }
+            else if(index == 2){
+                v->visit_pow_end(this);
+            }
+        };
 };
 			
 #endif //__POW_HPP__

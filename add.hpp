@@ -7,34 +7,29 @@
 class Add : public Base
 {
     public:
-        Add(Base*, Base*);
-        double evaluate();
-        std::string stringify();
         Base* left;
         Base* right;
-        void accept(Visitor*);
-        
+        Add(Base* l, Base* r){
+                this->left=l;
+                this->right=r;
+        };
+        double evaluate(){
+            return this->left->evaluate() + this->right->evaluate();
+        };
+        std::string stringify(){
+            return "(" + this->left->stringify() + "+" + this->right->stringify() + ")";
+        };
+        void accept(Visitor* v,int index){
+            if (index == 0){
+                v->visit_add_begin(this);
+            }
+            else if(index == 1){
+                v->visit_add_middle(this);
+            }
+            else if(index == 2){
+                v->visit_add_end(this);
+            }
+        };
 };
-
-Add::Add(Base* l, Base* r)
-{
-    this->left=l;
-    this->right=r;
-};
-
-double Add::evaluate()
-{
-    return this->left->evaluate() + this->right->evaluate();
-};
-
-std::string Add::stringify()
-{
-    return "(" + this->left->stringify() + "+" + this->right->stringify() + ")";
-};
-
-void Add::accept(Visitor* v)
-{
-    
-}
 
 #endif

@@ -20,6 +20,17 @@ class Mult : public Base {
 
 			return "(" + this->operand1->stringify() + "*" + this->operand2->stringify() + ")";
 		}
+		void accept(Visitor* v,int index){
+            if (index == 0){
+                v->visit_mult_begin(this);
+            }
+            else if(index == 1){
+                v->visit_mult_middle(this);
+            }
+            else if(index == 2){
+                v->visit_mult_end(this);
+            }
+        };
 };
 
 #endif //__MULT_HPP__

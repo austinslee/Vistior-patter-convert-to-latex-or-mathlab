@@ -15,12 +15,9 @@ class Op : public Base {
 		string stringVal = to_string(val);
 		return stringVal;
 	}
-        void accept(Visitor*);
+        void accept(Visitor* v){
+            v->visit_op(this);
+        };
 };
-
-void Op::accept(Visitor* v)
-{
-    v->visit_op(this);
-}
 
 #endif //__OP_HPP__
