@@ -1,6 +1,6 @@
 #include "visitor.hpp"
 
-MathMLVisitor::MathMLVisitor()
+MathMLVisitor::MathMLVisitor() : Visitor()
 {
     
 }

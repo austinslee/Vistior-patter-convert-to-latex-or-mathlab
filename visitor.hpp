@@ -1,15 +1,13 @@
 #ifndef __VISITOR_HPP__
 #define __VISITOR_HPP__
 
-#include <string.h>
-#include <iostream>
-#include "add.hpp"
-#include "sub.hpp"
-#include "mult.hpp"
-#include "rand.hpp"
-#include "op.hpp"
-#include "div.hpp"
-#include "pow.hpp"
+class Op;
+class Rand;
+class Add;
+class Sub;
+class Mult;
+class Div;
+class Pow;
 
 class Visitor{
     public:
@@ -38,24 +36,6 @@ class Visitor{
         virtual void visit_pow_begin(Pow* node) = 0;
         virtual void visit_pow_middle(Pow* node) = 0;
         virtual void visit_pow_end(Pow* node) = 0;
-};
-
-class LaTeXVisitor : public Visitor
-{
-    private:
-        std::string output;
-    public:
-        LaTeXVisitor();
-        std::string PrintLaTeX(Base*);
-};
-
-class MathMLVisitor : public Visitor
-{
-    private:
-        std::string output;
-    public:
-        MathMLVisitor();
-        std::string PrintMathML(Base*);
 };
 
 #endif //__VISITOR_HPP__

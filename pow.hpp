@@ -4,8 +4,7 @@
 #include<cmath>
 
 #include "base.hpp"
-
-using namespace std;
+#include "visitor.hpp"
 
 class Pow : public Base {
 	public:
@@ -21,9 +20,10 @@ class Pow : public Base {
 			return pow(operand->evaluate(), exponent->evaluate());
 		}
 		
-		virtual string stringify() {
+		virtual std::string stringify() {
 			return "(" + operand->stringify() + "**" + exponent->stringify() + ")";
 		}
+
 		void accept(Visitor* v,int index){
             if (index == 0){
                 v->visit_pow_begin(this);
@@ -34,18 +34,13 @@ class Pow : public Base {
             else if(index == 2){
                 v->visit_pow_end(this);
             }
-        };
-
-        int number_of_children() {
-                int num = 0;
-                if(operand != nullptr) { ++num; }
-                if(exponent != nullptr) { ++num; }
-                return num;
         }
 
+        int number_of_children() {return 2;}
+
         Base* get_child(int i) {
-                if(i == 1) { return base; }
-                if(i == 2) { return exponent; }
+                if(i == 0) { return this->operand; }
+                if(i == 1) { return this->exponent; }
                 return nullptr;
         }
 	
