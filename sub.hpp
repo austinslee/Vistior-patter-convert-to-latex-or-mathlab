@@ -12,14 +12,17 @@ class Sub : public Base
         Sub(Base* l,Base* r){
                 this->left = l;
                 this->right = r;
-        };
-        double evaluate(){
+        }
+
+        virtual double evaluate(){
             return this->left->evaluate() - this->right->evaluate();
-        };
-        std::string stringify(){
+        }
+
+        virtual std::string stringify(){
             return "(" + this->left->stringify() + "-" + this->right->stringify() + ")";
-        };
-        void accept(Visitor* v,int index){
+        }
+
+        virtual void accept(Visitor* v,int index){
             if (index == 0){
                 v->visit_sub_begin(this);
             }
@@ -29,18 +32,13 @@ class Sub : public Base
             else if(index == 2){
                 v->visit_sub_end(this);
             }
-        };
-
-        int number_of_children() {
-                int num = 0;
-                if(left != nullptr) { ++num; }
-                if(right != nullptr) { ++num; }
-                return num;
         }
 
-        Base* get_child(int i) {
-                if(i == 1) { return left; }
-                if(i == 2) { return right; }
+        virtual int number_of_children() {return 2;}
+
+        virtual Base* get_child(int i) {
+                if(i == 0) { return left; }
+                if(i == 1) { return right; }
                 return nullptr;
         }
 
