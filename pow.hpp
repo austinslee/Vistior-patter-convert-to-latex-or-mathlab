@@ -35,6 +35,21 @@ class Pow : public Base {
                 v->visit_pow_end(this);
             }
         };
+
+        int number_of_children() {
+                int num = 0;
+                if(operand != nullptr) { ++num; }
+                if(exponent != nullptr) { ++num; }
+                return num;
+        }
+
+        Base* get_child(int i) {
+                if(i == 1) { return base; }
+                if(i == 2) { return exponent; }
+                return nullptr;
+        }
+	
+
 };
 			
 #endif //__POW_HPP__

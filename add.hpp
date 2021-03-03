@@ -30,6 +30,20 @@ class Add : public Base
                 v->visit_add_end(this);
             }
         };
+
+	int number_of_children() { 
+		int num = 0;
+		if(left != nullptr) { ++num; }
+		if(right != nullptr) { ++num; }
+		return num;
+	}
+	
+	Base* get_child(int i) {
+		if(i == 1) { return left; }
+		if(i == 2) { return right; }
+		return nullptr;
+	}
+
 };
 
 #endif
