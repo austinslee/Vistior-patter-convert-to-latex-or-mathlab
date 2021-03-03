@@ -30,8 +30,8 @@ std::string PrintML(Base* ptr)
         i.current_node()->accept(mlv,i.current_index());
         i.next();
     }
-    std::cout<<mlv->ented()<<std::endl;
-    return mlv->ented();
+    std::cout<<mlv->end()<<std::endl;
+    return mlv->end();
 }
 
 

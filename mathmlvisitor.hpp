@@ -174,7 +174,7 @@ class MathMLVisitor : public Visitor
         }
     }
 
-    std::string ented() {
+    std::string end() {
         indent = 1;
         for (int i = 0; i < indent; i++){ syntax += "\t";}
         indent = 0;
