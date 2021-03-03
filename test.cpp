@@ -17,6 +17,7 @@ std::string Print(Base* ptr)
         i.next();
     }
     total += lv->PrintLaTeX() + "\n";
+    return lv->PrintLaTeX();
 
 }
 
@@ -30,6 +31,7 @@ std::string PrintML(Base* ptr)
         i.next();
     }
     std::cout<<mlv->ented()<<std::endl;
+    return mlv->ented();
 }
 
 
@@ -161,14 +163,16 @@ TEST(ChildTest, getChildPow1) {
 }
 
 TEST(LatexTest, test1) {
-	std::string total;
-	Base* test = new Add(new Op(1), new Sub(new Op(5), new Op(0)));
-	total = Print(test);
+        Base* six = new Op(6);
+        Base* seven = new Op(7);
+        Base* four = new Op(4);
+	Base* test = new Add(six, seven);
+        Base* test1 = new Sub(test,four);
 
-	EXPECT_EQ(total, "${({1}+{({5}-{0})})}$");
+	EXPECT_EQ(Print(test), "${({1}+{({5}-{0})})}$");
 }
 
-/*TEST(LatexTest, test2) {
+TEST(LatexTest, test2) {
         Base* test = new Pow(new Op(5), new Op(2));
         std::stringstream buffer;
         std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
@@ -248,7 +252,7 @@ TEST(MLTest, test5) {
         std::string capturedStdout = buffer.str();
         EXPECT_EQ(capturedStdout, "<math>\n\t<apply>\n\t\t<divide/>\n\t\t<apply>\n\t\t\t<times/>\n\t\t\t<cn>2</cn>\n\t\t\t<cn>5</cn>\n\t\t</apply>\n\t\t<apply>\n\t\t\t<power/>\n\t\t\t<cn>5</cn>\n\t\t\t<cn>2</cn>\n\t\t</apply>\n\t</apply>\n</math>");
 }
-*/
+
 
 
 
