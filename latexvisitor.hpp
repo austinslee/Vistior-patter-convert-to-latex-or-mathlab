@@ -14,12 +14,12 @@ public:
 std::string syntax = "";
 virtual void visit_rand(Rand* node)
 {
-    syntax += ("{" + node->stringify() + "}");
+    syntax += (node->stringify());
 }
 
 void visit_op(Op* node)
 {
-    syntax += "{" + node->stringify() + "}";
+    syntax +=  node->stringify() ;
 }
 
 void visit_add_begin(Add* node)

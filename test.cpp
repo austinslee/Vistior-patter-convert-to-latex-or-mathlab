@@ -163,94 +163,64 @@ TEST(ChildTest, getChildPow1) {
 }
 
 TEST(LatexTest, test1) {
-        Base* six = new Op(6);
-        Base* seven = new Op(7);
-        Base* four = new Op(4);
-	Base* test = new Add(six, seven);
-        Base* test1 = new Sub(test,four);
+        Base* one = new Op(1);
+        Base* five = new Op(5);
+        Base* zero = new Op(0);
+        Base* test1 = new Sub(five,zero);
+	Base* test = new Add(one,test1);
 
-	EXPECT_EQ(Print(test), "${({1}+{({5}-{0})})}$");
+	EXPECT_EQ(Print(test), "${({1.000000}+{{({5.000000}-{0.000000})}})}$");
 }
 
 TEST(LatexTest, test2) {
         Base* test = new Pow(new Op(5), new Op(2));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        Print(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "${({5}^{2})}$");
+        EXPECT_EQ(Print(test), "${({5.000000}^{2.000000})}$");
 }
 
 TEST(LatexTest, test3) {
         Base* test = new Mult(new Op(2), new Op(5));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        Print(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "${({2}\cdot{5})}$");
+
+
+
+        EXPECT_EQ(Print(test), "${({2.000000}\\cdot{5.000000})}$");
 }
 
 TEST(LatexTest, test4) {
         Base* test = new Div(new Op(2), new Op(3));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        Print(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "${\frac{2}{3}}$");
+
+        EXPECT_EQ(Print(test), "${\\frac{2.000000}{3.000000}}$");
 }
 
 TEST(LatexTest, test5) {
         Base* test = new Div(new Mult(new Op(2), new Op(5)), new Pow(new Op(5), new Op(2)));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        Print(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "${\frac{({2}\cdot{5})}{({5}^{2})}}$");
+
+        EXPECT_EQ(Print(test), "${\\frac{{({2.000000}\\cdot{5.000000})}}{{({5.000000}^{2.000000})}}}$");
 }
 
 TEST(MLTest, test1) {
         Base* test = new Add(new Op(1), new Sub(new Op(5), new Op(0)));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        PrintML(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "<math>\n\t<apply>\n\t\t<plus/>\n\t\t<cn>1</cn>\n\t\t<apply>\n\t\t\t<minus/>\n\t\t\t<cn>5</cn>\n\t\t\t<cn>0</cn>\n\t\t</apply>\n\t</apply>\n</math>");
+
+        EXPECT_EQ(PrintML(test), "<math>\n\t<apply>\n\t\t<plus/>\n\t\t<cn>1.000000</cn>\n\t\t<apply>\n\t\t\t<minus/>\n\t\t\t<cn>5.000000</cn>\n\t\t\t<cn>0.000000</cn>\n\t\t</apply>\n\t</apply>\n</math>\n\t</apply>\n</math>\n");
 }
 
 TEST(MLTest, test2) {
         Base* test = new Pow(new Op(5), new Op(2));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        PrintML(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "<math>\n\t<apply>\n\t\t<power/>\n\t\t<cn>5</cn>\n\t\t<cn>2</cn>\n\t</apply>\n</math>");
+        EXPECT_EQ(PrintML(test), "<math>\n\t<apply>\n\t\t<power/>\n\t\t<cn>5.000000</cn>\n\t\t<cn>2.000000</cn>\n\t</apply>\n</math>\n\t</apply>\n</math>\n");
 }
 
 TEST(MLTest, test3) {
         Base* test = new Mult(new Op(2), new Op(5));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        PrintML(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "<math>\n\t<apply>\n\t\t<times/>\n\t\t<cn>2</cn>\n\t\t<cn>5</cn>\n\t</apply>\n</math>");
+        EXPECT_EQ(PrintML(test), "<math>\n\t<apply>\n\t\t<times/>\n\t\t<cn>2.000000</cn>\n\t\t<cn>5.000000</cn>\n\t</apply>\n</math>\n\t</apply>\n</math>\n");
 }
 
 TEST(MLTest, test4) {
         Base* test = new Div(new Op(2), new Op(3));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        PrintML(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "<math>\n\t<apply>\n\t\t<divide/>\n\t\t<cn>2</cn>\n\t\t<cn>3</cn>\n\t</apply>\n</math>");
+        EXPECT_EQ(PrintML(test), "<math>\n\t<apply>\n\t\t<divide/>\n\t\t<cn>2.000000</cn>\n\t\t<cn>3.000000</cn>\n\t</apply>\n</math>\n\t</apply>\n</math>\n");
 }
 
 TEST(MLTest, test5) {
         Base* test = new Div(new Mult(new Op(2), new Op(5)), new Pow(new Op(5), new Op(2)));
-        std::stringstream buffer;
-        std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-        PrintML(test);
-        std::string capturedStdout = buffer.str();
-        EXPECT_EQ(capturedStdout, "<math>\n\t<apply>\n\t\t<divide/>\n\t\t<apply>\n\t\t\t<times/>\n\t\t\t<cn>2</cn>\n\t\t\t<cn>5</cn>\n\t\t</apply>\n\t\t<apply>\n\t\t\t<power/>\n\t\t\t<cn>5</cn>\n\t\t\t<cn>2</cn>\n\t\t</apply>\n\t</apply>\n</math>");
+        EXPECT_EQ(PrintML(test), "<math>\n\t<apply>\n\t\t<divide/>\n\t\t<apply>\n\t\t\t<times/>\n\t\t\t<cn>2.000000</cn>\n\t\t\t<cn>5.000000</cn>\n\t\t</apply>\n\t\t<apply>\n\t\t\t<power/>\n\t\t\t<cn>5.000000</cn>\n\t\t\t<cn>2.000000</cn>\n\t\t</apply>\n\t</apply>\n</math>\n\t</apply>\n</math>\n");
 }
 
 
