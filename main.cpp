@@ -2,6 +2,7 @@
 #include <iostream>
 #include "latexvisitor.hpp"
 #include "iterator.hpp"
+#include "mathmlvisitor.hpp"
 
 std::string Print(Base* ptr)
 {
@@ -16,6 +17,18 @@ std::string Print(Base* ptr)
     
 }
 
+std::string PrintML(Base* ptr)
+{
+    Iterator i(ptr);
+    MathMLVisitor* mlv = new MathMLVisitor;
+    while(!i.is_done())
+    {
+        i.current_node()->accept(mlv,i.current_index());
+        i.next();
+    }
+    std::cout<<mlv->ented()<<std::endl;
+}
+
 int main()
 {
     Base* six = new Op(6);
@@ -28,6 +41,12 @@ int main()
     Base* div = new Div(minus, five);
     Base* pow = new Pow(div, five);
 
-    std::cout << pow->stringify() << " = " << pow->evaluate() << std::endl;
+	Base* one = new Op(1);
+	Base* zero = new Op(0);
+	Base* sub1 = new Sub(five,zero);
+	Base* add1 = new Add(one,sub1);
+
+    std::cout << add1->stringify() << " = " << add1->evaluate() << std::endl;
     Print(pow);
+	PrintML(add1);
 }

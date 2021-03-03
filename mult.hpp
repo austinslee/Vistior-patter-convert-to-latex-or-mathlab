@@ -5,12 +5,17 @@
 
 class Mult : public Base {
 	public:
-		Base* operand1;
-		Base* operand2;
+		Base* operand1 = nullptr;
+		Base* operand2 = nullptr;
 		Mult(Base* left, Base* right) : Base() { 
 			operand1 = left;
 			operand2 = right;
 		}
+
+		Mult() {}
+
+		Mult(Base* l) { operand1 = l; }		
+
 		virtual double evaluate() {
 			return this->operand1->evaluate() * this->operand2->evaluate();
 		}
@@ -30,7 +35,12 @@ class Mult : public Base {
             }
         }
 
-        virtual int number_of_children() {return 2;}
+        virtual int number_of_children() {
+		int x = 0;
+		if(operand1 != nullptr) { ++x; }
+		if(operand2 != nullptr) { ++x; }
+		return x;
+	}
 
         virtual Base* get_child(int i) {
                 if(i == 0) { return operand1; }

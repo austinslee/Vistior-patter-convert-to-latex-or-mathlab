@@ -9,3 +9,10 @@ main.cpp
 latexvisitor.hpp
 iterator.cpp
 )
+
+ADD_EXECUTABLE(test
+    test.cpp
+)
+
+TARGET_LINK_LIBRARIES(test gtest)
+TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON)

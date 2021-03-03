@@ -7,12 +7,16 @@
 class Sub : public Base
 {
     public:
-        Base* left;
-        Base* right;
+        Base* left = nullptr;
+        Base* right = nullptr;
         Sub(Base* l,Base* r){
                 this->left = l;
                 this->right = r;
         }
+
+	Sub(Base* l) { left = l; }
+
+	Sub() {}
 
         virtual double evaluate(){
             return this->left->evaluate() - this->right->evaluate();
@@ -34,7 +38,13 @@ class Sub : public Base
             }
         }
 
-        virtual int number_of_children() {return 2;}
+        virtual int number_of_children() {
+		int x = 0;
+		if(left != nullptr) { ++x; }
+		if(right != nullptr) { ++x; }
+		return x;
+
+	}
 
         virtual Base* get_child(int i) {
                 if(i == 0) { return left; }

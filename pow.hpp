@@ -8,13 +8,16 @@
 
 class Pow : public Base {
 	public:
-		Base* operand;
-		Base* exponent;
+		Base* operand = nullptr;
+		Base* exponent = nullptr;
 
 		Pow(Base* input1, Base* input2) : Base() {
 			operand = input1;
 			exponent = input2;
 		}
+
+		Pow() {}
+		Pow(Base* l) { operand = l; }
 
 		virtual double evaluate() {			
 			return pow(operand->evaluate(), exponent->evaluate());
@@ -36,7 +39,12 @@ class Pow : public Base {
             }
         }
 
-        int number_of_children() {return 2;}
+        int number_of_children() {
+		int x = 0;
+		if(operand != nullptr) { ++x; }
+		if(exponent != nullptr) { ++x; }
+		return x;
+	}
 
         Base* get_child(int i) {
                 if(i == 0) { return this->operand; }

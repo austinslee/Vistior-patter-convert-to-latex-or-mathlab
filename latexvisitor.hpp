@@ -11,95 +11,95 @@
 class LaTeXVisitor : public Visitor
 {
 public:
-std::string output = "";
+std::string syntax = "";
 virtual void visit_rand(Rand* node)
 {
-    output += ("{" + node->stringify() + "}");
+    syntax += ("{" + node->stringify() + "}");
 }
 
 void visit_op(Op* node)
 {
-    output += "{" + node->stringify() + "}";
+    syntax += "{" + node->stringify() + "}";
 }
 
 void visit_add_begin(Add* node)
 {
-    output += "{({";
+    syntax += "{({";
 }
 
 void visit_add_middle(Add* node)
 {
-    output += "}+{";
+    syntax += "}+{";
 }
 
 void visit_add_end(Add* node)
 {
-    output += "})}";
+    syntax += "})}";
 }
 
 void visit_sub_begin(Sub* node)
 {
-    output += "{({";
+    syntax += "{({";
 }
 
 void visit_sub_middle(Sub* node)
 {
-    output += "}-{";
+    syntax += "}-{";
 }
 
 void visit_sub_end(Sub* node)
 {
-    output += "})}";
+    syntax += "})}";
 }
 
 void visit_mult_begin(Mult* node)
 {
-    output += "{({";
+    syntax += "{({";
 }
 
 void visit_mult_middle(Mult* node)
 {
-    output += "}\\cdot{";
+    syntax += "}\\cdot{";
 }
 
 void visit_mult_end(Mult* node)
 {
-    output += "})}";
+    syntax += "})}";
 }
 
 void visit_div_begin(Div* node)
 {
-    output += "{\\frac{";
+    syntax += "{\\frac{";
 }
 
 void visit_div_middle(Div* node)
 {
-    output += "}{";
+    syntax += "}{";
 }
 
 void visit_div_end(Div* node)
 {
-    output += "}}";
+    syntax += "}}";
 }
 
 void visit_pow_begin(Pow* node)
 {
-    output += "{({";
+    syntax += "{({";
 }
 
 void visit_pow_middle(Pow* node)
 {
-    output += "}^{";
+    syntax += "}^{";
 }
 
 void visit_pow_end(Pow* node)
 {
-    output += "})}";
+    syntax += "})}";
 }
 
 std::string PrintLaTeX()
 {
-    return ("$" + output + "$");
+    return ("$" + syntax + "$");
 }
 
 };
