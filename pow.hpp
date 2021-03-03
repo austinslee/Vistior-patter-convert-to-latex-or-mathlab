@@ -4,6 +4,7 @@
 #include<cmath>
 
 #include "base.hpp"
+#include "visitor.hpp"
 
 using namespace std;
 
@@ -44,7 +45,7 @@ class Pow : public Base {
         }
 
         Base* get_child(int i) {
-                if(i == 1) { return base; }
+                if(i == 1) { return operand; }
                 if(i == 2) { return exponent; }
                 return nullptr;
         }

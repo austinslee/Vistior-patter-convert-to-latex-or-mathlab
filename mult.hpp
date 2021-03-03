@@ -2,6 +2,7 @@
 #define __MULT_HPP__
 
 #include "base.hpp"
+#include "visitor.hpp"
 
 using namespace std;
 
@@ -34,14 +35,14 @@ class Mult : public Base {
 
         int number_of_children() {
                 int num = 0;
-                if(left != nullptr) { ++num; }
-                if(right != nullptr) { ++num; }
+                if(operand1 != nullptr) { ++num; }
+                if(operand2 != nullptr) { ++num; }
                 return num;
         }
 
         Base* get_child(int i) {
-                if(i == 1) { return left; }
-                if(i == 2) { return right; }
+                if(i == 1) { return operand1; }
+                if(i == 2) { return operand2; }
                 return nullptr;
         }
 
