@@ -1,5 +1,4 @@
 #include "visitor.hpp"
-#include "iterator.hpp"
 #include "base.hpp"
 #include "op.hpp"
 #include "add.hpp"
@@ -11,14 +10,11 @@
 
 class LaTeXVisitor : public Visitor
 {
-    private:
-    std::string output;
-
 public:
-
+std::string output = "";
 virtual void visit_rand(Rand* node)
 {
-    output.append("{" + node->stringify() + "}");
+    output += ("{" + node->stringify() + "}");
 }
 
 void visit_op(Op* node)

@@ -12,7 +12,8 @@ std::string Print(Base* ptr)
         i.current_node()->accept(lv,i.current_index());
         i.next();
     }
-    lv->PrintLaTeX();
+    std::cout << lv->PrintLaTeX();
+    
 }
 
 int main()
@@ -24,10 +25,9 @@ int main()
     Base* mult = new Mult(seven, four);
     Base* add = new Add(three, mult);
     Base* minus = new Sub(add, two);
+    Base* div = new Div(minus, two);
+    Base* pow = new Pow(div, two);
 
-    Base* add1 = new Add(three, four);
-    Base* sub1 = new Sub(add1, two);
-
-    std::cout << Print(sub1) << std::endl;
-    return 0;
+    std::cout << pow->stringify() << " = " << pow->evaluate() << std::endl;
+    Print(pow);
 }
