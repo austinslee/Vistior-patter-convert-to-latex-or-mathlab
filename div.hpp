@@ -16,6 +16,11 @@ class Div : public Base
 	Div() {}
 	Div(Base* l) { left = l; }
 
+	~Div() {
+		delete left;
+		delete right;
+	}
+
         virtual double evaluate(){
             return this->left->evaluate() / this->right->evaluate();
         }

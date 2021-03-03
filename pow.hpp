@@ -19,6 +19,11 @@ class Pow : public Base {
 		Pow() {}
 		Pow(Base* l) { operand = l; }
 
+		~Pow() {
+			delete operand;
+			delete exponent;
+		}
+
 		virtual double evaluate() {			
 			return pow(operand->evaluate(), exponent->evaluate());
 		}

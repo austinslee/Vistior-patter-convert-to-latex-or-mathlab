@@ -17,6 +17,11 @@ class Sub : public Base
 	Sub(Base* l) { left = l; }
 
 	Sub() {}
+	
+	~Sub() {
+		delete left;
+		delete right;
+	}
 
         virtual double evaluate(){
             return this->left->evaluate() - this->right->evaluate();

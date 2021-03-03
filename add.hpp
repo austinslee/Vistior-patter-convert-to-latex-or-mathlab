@@ -15,6 +15,11 @@ class Add : public Base
 
 	Add(){}
 
+	~Add() {
+		delete left;
+		delete right;
+	}
+
 	Add(Base* l) {
 		left = l;
 	}	

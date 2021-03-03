@@ -16,6 +16,11 @@ class Mult : public Base {
 
 		Mult(Base* l) { operand1 = l; }		
 
+		~Mult() {
+			delete operand1;
+			delete operand2;
+		}
+
 		virtual double evaluate() {
 			return this->operand1->evaluate() * this->operand2->evaluate();
 		}
